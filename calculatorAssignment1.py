@@ -8,13 +8,14 @@ class CalculatorFrame(wx.Frame):
 
         self.display = wx.TextCtrl(panel, style=wx.TE_RIGHT)
 
-        grid = wx.GridSizer(4, 4, 10, 10)
+        grid = wx.GridSizer(5, 4, 10, 10)
 
         buttons = [
             '7', '8', '9', '/',
             '4', '5', '6', '*',
             '1', '2', '3', '-',
-            '0', '.', '=', '+'
+            '0', '.', '=', '+',
+            'C'
         ]
 
         for label in buttons:
@@ -37,6 +38,14 @@ class CalculatorFrame(wx.Frame):
         if label == '=':
             try:
                 result = str(eval(current_value))
+                self.display.SetValue(result)
+            except Exception as e:
+                self.display.SetValue("Error")
+        else:
+            self.display.SetValue(current_value + label)
+        if label == 'C':
+            try:
+                result = "";
                 self.display.SetValue(result)
             except Exception as e:
                 self.display.SetValue("Error")
